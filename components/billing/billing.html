@@ -1,0 +1,145 @@
+<div class="container">
+  <h1 class="mb-4">Billing Details</h1>
+
+  <div class="row">
+    <div class="col-6">
+      <form>
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="company_name" class="form-label">Company Name</label>
+            <input
+              type="text"
+              id="company_name"
+              name="company_name"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="street_task" class="form-label">Street Address</label>
+            <input
+              type="text"
+              id="street_task"
+              name="street_task"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="aprt_floor" class="form-label"
+              >Apartment, floor, etc. (optional)</label
+            >
+            <input
+              type="text"
+              id="aprt_floor"
+              name="aprt_floor"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="country" class="form-label">country</label>
+            <select name="country" id="country">
+              <option value="ind">India</option>
+            </select>
+          </div>
+
+          <div class="col-md-12">
+            <label for="state" class="form-label">state</label>
+            <select name="state" id="state">
+              <option value="guj">Gujrat</option>
+              <option value="uk">Uttarakhand</option>
+              <option value="del">Delhi</option>
+              <option value="raj">Rajasthan</option>
+            </select>
+          </div>
+
+          <div class="col-md-12">
+            <label for="city" class="form-label">Town/City</label>
+            <input type="text" id="city" name="city" class="form-control" />
+          </div>
+
+          <div class="col-md-12">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="email_address" class="form-label">Email Address</label>
+            <input
+              type="email"
+              id="email_address"
+              name="email_address"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <input type="checkbox" name="save_info" id="save_info" />
+            <label for="save_info" class="form-label">
+              Save this information for faster checkout next time
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- right side  -->
+    <div class="col-6" id="payment-details">
+      <h4 class="mb-3">Order Summary</h4>
+      <table id="payment-table" class="table table-borderless">
+        <tbody></tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-6">
+          <div>
+            <input type="radio" name="payment_type" id="bank" />
+            <label for="bank">Bank:</label>
+          </div>
+          <div>
+            <input type="radio" name="payment_type" id="cash_on_delivery" />
+            <label for="cash_on_delivery">Cash on Delivery:</label>
+          </div>
+        </div>
+        <div class="col-6">
+          <img src="../../assets/Images/banks-photo.png" alt="" class="img-fluid" />
+        </div>
+      </div>
+
+      <p></p>
+
+      <div class="mb-3 mb-md-0">
+        <form class="d-flex gap-2">
+          <input
+            type="text"
+            name="coupon"
+            id="coupon"
+            placeholder="Coupon Code"
+          />
+          <button type="submit" class="btn btn-danger rounded-0 px-2">
+            Apply Coupon
+          </button>
+        </form>
+
+        <p></p>
+        <button class="btn btn-danger py-2 rounded-1">Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>

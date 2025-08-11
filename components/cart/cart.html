@@ -1,0 +1,83 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <div class="d-flex align-items-center">
+            <img
+              src="../../assets/Images/laptop.png"
+              class="img-fluid me-2"
+              style="max-width: 60px"
+              alt="LCD Monitor"
+            />
+            <span>Lcd Monitor</span>
+          </div>
+        </th>
+        <td>$500</td>
+        <td>
+          <input
+            type="number"
+            min="1"
+            value="1"
+          />
+        </td>
+        <td>$5000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-outline-dark">Return to shop</button>
+    <button class="btn btn-outline-dark">Update cart</button>
+  </div>
+  <div class="row mt-5">
+    <!-- Coupon Form -->
+    <div class="col-md-6 mb-3 mb-md-0">
+      <form class="d-flex gap-2">
+        <input
+          type="text"
+          name="coupon"
+          id="coupon"
+          placeholder="Coupon Code"
+        />
+        <button type="submit" class="btn btn-danger rounded-0">
+          Apply Coupon
+        </button>
+      </form>
+    </div>
+
+    <!-- Cart Total Table -->
+    <div class="col-md-6">
+      <div class="card border-1 border-dark shadow-sm">
+        <div class="card-body">
+          <h5 class="mb-4">Cart Total</h5>
+          <table class="table table-borderless mb-4">
+            <tbody>
+              <tr class="border-bottom">
+                <td>Subtotal</td>
+                <td class="text-end">$1750</td>
+              </tr>
+              <tr class="border-bottom">
+                <td>Shipping</td>
+                <td class="text-end">Free</td>
+              </tr>
+              <tr class="fw-bold">
+                <td>Total</td>
+                <td class="text-end">$1750</td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#" class="btn btn-danger w-100">Proceed to Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
