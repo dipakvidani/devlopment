@@ -121,34 +121,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">
-                <div class="d-flex align-items-center">
-                  <img
-                    src="../../assets/Images/laptop.png"
-                    class="img-fluid me-2"
-                    style="max-width: 60px"
-                    alt="LCD Monitor"
-                  />
-                  <span>Lcd Monitor</span>
-                </div>
-              </th>
-              <td>$500</td>
-              <td>
-                <input
-                  type="number"
-                  min="1"
-                  value="1"
-                />
-              </td>
-              <td>$5000</td>
-            </tr>
+            <!-- Cart items will be loaded dynamically here -->
           </tbody>
         </table>
       
         <div class="d-flex justify-content-between">
-          <button class="btn btn-outline-dark">Return to shop</button>
-          <button class="btn btn-outline-dark">Update cart</button>
+          <a href="../index.html" class="btn btn-outline-dark">Return to shop</a>
+          <button class="btn btn-outline-dark" onclick="clearCart()">Clear cart</button>
         </div>
         <div class="row mt-5">
           <!-- Coupon Form -->
@@ -187,7 +166,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <a href="#" class="btn btn-danger w-100">Proceed to Checkout</a>
+                <button onclick="proceedToCheckout()" class="btn btn-danger w-100">Proceed to Checkout</button>
               </div>
             </div>
           </div>

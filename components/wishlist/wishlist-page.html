@@ -112,13 +112,17 @@
     <div id="main-content" class="py-5">
       <div class="my-5 container">
         <div class="d-flex justify-content-between align-items-center">
-          <span class="fw-semibold fs-4">wishlist(4)</span>
-          <button class="btn btn-outline-dark">Move All to Bag</button>
+          <span class="fw-semibold fs-4">Wishlist (<span id="wishlist-count">0</span>)</span>
+          <button class="btn btn-outline-dark" onclick="clearWishlist()">Clear All</button>
         </div>
         <p></p>
         <p></p>
-        <div class="row" id="product-list"></div>
-        <div class="d-flex justify-content-between align-items-center my-3">
+        
+        <!-- Wishlist container -->
+        <div id="wishlist-container"></div>
+        
+        <!-- Just For You section -->
+        <div class="d-flex justify-content-between align-items-center my-5">
           <div class="d-flex align-items-center fw-bold fs-5">
             <div class="bg-danger px-2 py-3 rounded-2 me-2"></div>
             Just For You

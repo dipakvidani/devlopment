@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-expand-lg bg-transparent row border-bottom">
   <div class="d-flex justify-content-between px-5">
-    <a class="navbar-brand col-1 fw-bold text-center" href="#">Exclusive</a>
+    <a class="navbar-brand col-1 fw-bold text-center" href="index.html">Exclusive</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -41,23 +41,23 @@
         class="navbar-nav d-flex justify-content-evenly w-100 aliit mb-2 mb-lg-0"
       >
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/components/index.html">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contact</a>
+          <a class="nav-link active" aria-current="page" href="#" onclick="showContact()">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">About</a>
+          <a class="nav-link active" aria-current="page" href="#" onclick="showAbout()">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/components/login/login.html">Sign up </a>
+         <li class="nav-item" id="auth-nav-item">
+          <a class="nav-link active" aria-current="page" href="login/login.html" id="auth-link">Sign up</a>
         </li>
       </ul>
     </div>
 
     <div class="col-2"></div>
-    <div class="col-3">
-      <form class="d-flex " role="search">
+    <div class="col-3 d-flex align-items-center">
+      <form class="d-flex me-3" role="search">
         <input
           class="form-control bg-secondary-subtle text-black"
           type="search"
@@ -68,6 +68,41 @@
           <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         </button>
       </form>
+      
+      <!-- Favorite/Wishlist Icon -->
+      <a href="wishlist/wishlist-page.html" class="text-dark position-relative me-3" title="Wishlist">
+        <i class="fa-solid fa-heart fs-5"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count" style="font-size: 0.6rem;">
+          0
+        </span>
+      </a>
+      
+      <!-- Cart Icon -->
+      <a href="cart/cart.html" class="text-dark position-relative me-3" title="Cart">
+        <i class="fa-solid fa-shopping-cart fs-5"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" style="font-size: 0.6rem;">
+          0
+        </span>
+      </a>
+      
+      <!-- Profile Icon -->
+      <div class="dropdown">
+        <a href="#" class="text-dark dropdown-toggle text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Profile">
+          <i class="fa-solid fa-user fs-5"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+          <li><a class="dropdown-item" href="edit-profile/edit-profile.html">
+            <i class="fa-solid fa-user-edit me-2"></i>Edit Profile
+          </a></li>
+          <li><a class="dropdown-item" href="#" onclick="showOrders()">
+            <i class="fa-solid fa-shopping-bag me-2"></i>My Orders
+          </a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#" onclick="logout()" id="logout-link" style="display: none;">
+            <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
+          </a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
