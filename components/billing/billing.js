@@ -1,21 +1,5 @@
-const Cart_products = [
-  {
-    id: 1,
-    title: "Breed Dry Dog Food",
-    price: 100,
-    rating: 3.5,
-    reviews: 35,
-    image: "../../assets/Images/cesar-product.png",
-  },
-  {
-    id: 2,
-    title: "Canon EOS DSLR Camera",
-    price: 380,
-    rating: 4,
-    reviews: 95,
-    image: "../../assets/Images/camera.png",
-  },
-];
+// Billing functionality - using centralized data
+// This file now uses the centralized data from assets/js/data.js
 
 function renderBillingDetails() {
   let paymentDetails = document.getElementById("payment-details");
@@ -27,7 +11,7 @@ function renderBillingDetails() {
   }
 
   let html = "";
-  Cart_products.forEach((product, idx) => {
+  CART_PRODUCTS.forEach((product, idx) => {
     html += `
           <tr>
               <td>
@@ -43,7 +27,7 @@ function renderBillingDetails() {
 
   paymentTable.innerHTML += html;
 
-  const subtotal = Cart_products.reduce((prev, product) => prev + product.price, 0);
+  const subtotal = CART_PRODUCTS.reduce((prev, product) => prev + product.price, 0);
   
   paymentTable.innerHTML += `
               <tr>
@@ -75,5 +59,12 @@ function renderBillingDetails() {
 
 // Make the function available globally
 window.renderBillingDetails = renderBillingDetails;
+
+// Auto-initialize when this page is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof renderBillingDetails === "function") {
+    renderBillingDetails();
+  }
+});
 
 

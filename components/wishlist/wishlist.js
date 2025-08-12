@@ -1,78 +1,5 @@
-const wishlist_products = [
-  {
-    id: 1,
-    title: "Breed Dry Dog Food",
-    price: 100,
-    rating: 3.5,
-    reviews: 35,
-    image: "../../assets/Images/cesar-product.png",
-    discount: "10",
-  },
-  {
-    id: 2,
-    title: "Canon EOS DSLR Camera",
-    price: 380,
-    rating: 4,
-    reviews: 95,
-    image: "../../assets/Images/camera.png",
-    discount: "15",
-  },
-  {
-    id: 3,
-    title: "ASUS FHD Gaming Laptop",
-    price: 700,
-    rating: 4.5,
-    reviews: 325,
-    image: "../../assets/Images/laptop.png",
-    discount: "20",
-  },
-  {
-    id: 4,
-    title: "Curology Product Set",
-    price: 500,
-    rating: 4,
-    reviews: 145,
-    image: "../../assets/Images/skincare.png",
-    discount: "5",
-  },
-  {
-    id: 5,
-    title: "Kids Electric Car",
-    price: 960,
-    rating: 5,
-    reviews: 65,
-    image: "../../assets/Images/kids-car.png",
-    discount: "25",
-  },
-  {
-    id: 6,
-    title: "Jr. Zoom Soccer Cleats",
-    price: 1160,
-    rating: 4.5,
-    reviews: 35,
-    image: "../../assets/Images/shoes.png",
-    discount: "30",
-  },
-  {
-    id: 7,
-    title: "GP11 Shooter USB Gamepad",
-    price: 660,
-    rating: 4,
-    reviews: 55,
-    image: "../../assets/Images/gamepad.png",
-    discount: "12",
-  },
-  {
-    id: 8,
-    title: "Quilted Satin Jacket",
-    price: 660,
-    rating: 4,
-    reviews: 55,
-    image: "../../assets/Images/jacket.png",
-    discount: "18",
-  },
-];
-
+// Wishlist functionality - using centralized data
+// This file now uses the centralized data from assets/js/data.js
 
 function generateStars(rating) {
   let stars = "";
@@ -101,7 +28,10 @@ function generateStars(rating) {
 function renderProducts() {
   let container = document.getElementById("product-list");
 
-  wishlist_products.slice(0, 4).forEach((p) => {
+  // Get first 4 products for wishlist
+  const wishlistProducts = WISHLIST_PRODUCTS.slice(0, 4);
+
+  wishlistProducts.forEach((p) => {
     container.innerHTML += `<div class="col-md-3 col-sm-6 d-flex">
   <div class="card position-relative flex-fill shadow-none border-0 h-100">
 
@@ -118,7 +48,7 @@ function renderProducts() {
     <!-- Image wrapper -->
     <div class="card-img-top p-3 bg-secondary-subtle">
       <img src="${p.image}" 
-           alt="${p.name}" 
+           alt="${p.title}" 
            class="w-100 img-fluid" 
            style="height:300px; ">
     </div>
@@ -150,7 +80,10 @@ function renderProducts() {
   //just for you
     let justForYouContainer = document.getElementById("product-list-just-for-you");
 
-    wishlist_products.slice(4).forEach((p) => {
+    // Get remaining products for "Just For You"
+    const justForYouProducts = WISHLIST_PRODUCTS.slice(4);
+
+    justForYouProducts.forEach((p) => {
     justForYouContainer.innerHTML += `<div class="col-md-3 col-sm-6 d-flex">
         <div class="card position-relative flex-fill shadow-none border-0 h-100">
 
@@ -167,7 +100,7 @@ function renderProducts() {
             <!-- Image wrapper -->
             <div class="card-img-top p-3 bg-secondary-subtle">
             <img src="${p.image}" 
-                alt="${p.name}" 
+                alt="${p.title}" 
                 class="w-100 img-fluid" 
                 style="height:300px;">
             </div>
@@ -200,3 +133,13 @@ function renderProducts() {
   `;
   });
 }
+
+// Make function available globally
+window.renderProducts = renderProducts;
+
+// Auto-initialize when this page is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof renderProducts === "function") {
+    renderProducts();
+  }
+});
