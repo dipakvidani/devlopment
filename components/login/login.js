@@ -45,7 +45,7 @@ document.addEventListener("submit", function (event) {
         console.warn("Failed to parse login response");
       }
     //   alert("Login successful!");
-      location.href = "home.html";
+      location.href = "../home/home.html";
     } else {
       let errorMsg = "Login failed!";
       try {

@@ -1,20 +1,45 @@
-// Home page functionality - using centralized data
-// This file now uses the centralized data from assets/js/data.js
+//generate stars
+function generateStars(rating) {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+  let stars = "";
 
+  for (let i = 0; i < fullStars; i++) {
+    stars += '<i class="fa-solid fa-star text-warning"></i>';
+  }
+
+  if (hasHalfStar) {
+    stars += '<i class="fa-solid fa-star-half-stroke text-warning"></i>';
+  }
+
+  const emptyStars = 5 - Math.ceil(rating);
+  for (let i = 0; i < emptyStars; i++) {
+    stars += '<i class="fa-regular fa-star text-warning"></i>';
+  }
+
+  return stars;
+}
+
+//render products
 function renderProducts() {
   const container = document.getElementById("product-list");
   if (!container) return;
 
   let html = "";
   PRODUCTS_DATA.forEach((product) => {
+    const isInWishlist = isProductInWishlist(product.id);
     html += `
       <div class="col-md-3 mb-4 d-flex">
         <div class="card border-0 h-100 w-100 d-flex flex-column">
 
           <div class="p-5 bg-secondary-subtle rounded-3 position-relative d-flex justify-content-center align-items-center" style="min-height: 220px;">
 
-            <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 rounded-5 bg-white border-0">
-              <i class="fa-regular fa-heart text-secondary"></i>
+            <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 rounded-5 bg-white border-0 wishlist-btn" 
+                    id="${product.id}" 
+                    onclick="toggleWishlist(${product.id})">
+              <i class="fa-${
+                isInWishlist ? "solid" : "regular"
+              } fa-heart text-${isInWishlist ? "danger" : "secondary"}"></i>
             </button>
 
             <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 mt-5 rounded-5 bg-white border-0 ">
@@ -44,6 +69,7 @@ function renderProducts() {
   container.innerHTML = html;
 }
 
+//render features
 function renderFeatures() {
   const features = document.getElementById("features");
   if (!features) return;
@@ -70,11 +96,85 @@ function renderFeatures() {
   features.innerHTML = html;
 }
 
+// Wishlist functionality
+
+//check if product is in wishlist
+function isProductInWishlist(productId) {
+  const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+  return wishlist.includes(productId);
+}
+
+//toggle wishlist
+function toggleWishlist(productId) {
+  const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+  const isInWishlist = wishlist.includes(productId);
+
+  //if product is in wishlist, remove it
+  if (isInWishlist) {
+    // Remove from wishlist
+    const newWishlist = wishlist.filter((id) => id !== productId);
+    localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+
+    // Update button appearance
+    const button = document.querySelector(`[id="${productId}"]`);
+    if (button) {
+      const icon = button.querySelector("i");
+      icon.className = "fa-regular fa-heart text-secondary";
+    }
+  } else {
+    // Add to wishlist
+    wishlist.push(productId);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+    // Update button appearance
+    const button = document.querySelector(`[id="${productId}"]`);
+    if (button) {
+      const icon = button.querySelector("i");
+      icon.className = "fa-solid fa-heart text-danger";
+    }
+  }
+  
+  // Update header icons after wishlist changes
+  updateHeaderIcons();
+}
+
+// Update header icons
+function updateHeaderIcons() {
+  // Update wishlist icon and count
+  const wishlistIcon = document.querySelector('.fa-heart');
+  const wishlistCount = document.querySelector('.wishlist-count');
+  if (wishlistIcon && wishlistCount) {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    wishlistCount.textContent = wishlist.length;
+    
+    // if (wishlist.length > 0) {
+    //   wishlistIcon.className = 'fa-solid fa-heart text-danger';
+    //   wishlistCount.style.display = 'block';
+    // } else {
+    //   wishlistIcon.className = 'fa-regular fa-heart';
+    //   wishlistCount.style.display = 'none';
+    // }
+  }
+  
+  // Update cart count
+  const cartCount = document.querySelector('.cart-count');
+  if (cartCount) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cartCount.textContent = cart.length;
+    if (cart.length === 0) {
+      cartCount.style.display = 'none';
+    } else {
+      cartCount.style.display = 'block';
+    }
+  }
+}
+
 // Make functions available globally
 window.renderProducts = renderProducts;
 window.renderFeatures = renderFeatures;
+window.toggleWishlist = toggleWishlist;
 
-// Auto-initialize when this page is opened directly
+// load products and features
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof renderProducts === "function") {
     renderProducts();
@@ -82,5 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof renderFeatures === "function") {
     renderFeatures();
   }
-});
   
+  // Update header icons
+  updateHeaderIcons();
+});

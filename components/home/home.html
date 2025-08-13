@@ -40,7 +40,7 @@
             >Exclusive</a
           >
           <button
-            class="navbar-toggler"
+            class="navbar-toggler col-1"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -50,9 +50,8 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="col-2"></div>
           <div
-            class="collapse navbar-collapse fw-bold d-flex justify-content-center col-4"
+            class="collapse navbar-collapse fw-bold d-flex justify-content-center col-3"
             id="navbarSupportedContent"
           >
             <ul
@@ -87,9 +86,8 @@
             </ul>
           </div>
 
-          <div class="col-2"></div>
-          <div class="col-3">
-            <form class="d-flex" role="search">
+          <div class="col-4 d-flex justify-content-center">
+            <form class="d-flex me-3 col-7" role="search">
               <input
                 class="form-control bg-secondary-subtle text-black"
                 type="search"
@@ -103,6 +101,34 @@
                 <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
               </button>
             </form>
+
+            <!-- Wishlist and Cart Icons -->
+            <div class="d-flex align-items-center gap-3 col-4 justify-content-center">
+              <a
+                href="/components/wishlist/wishlist-page.html"
+                class="text-dark text-decoration-none position-relative"
+              >
+                <i class="fa-solid fa-heart fs-5 "></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count"
+                  style="font-size: 0.6rem"
+                >
+                  0
+                </span>
+              </a>
+              <a
+                href="/components/cart/cart.html"
+                class="text-dark text-decoration-none position-relative"
+              >
+                <i class="fa-solid fa-cart-shopping fs-5"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count"
+                  style="font-size: 0.6rem"
+                >
+                  0
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </nav>

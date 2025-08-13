@@ -1,11 +1,11 @@
-// fetch("./header/header.html")
-//   .then((response) => response.text())
-//   .then((html) => {
-//     document.getElementById("header").innerHTML = html;
-//   })
-//   .catch((error) => {
-//     console.error("Failed to load the header.html:", error);
-//   });
+fetch("./header/header.html")
+  .then((response) => response.text())
+  .then((html) => {
+    document.getElementById("header").innerHTML = html;
+  })
+  .catch((error) => {
+    console.error("Failed to load the header.html:", error);
+  });
 
 //home page
 // fetch("./home/home.html")
