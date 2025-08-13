@@ -40,7 +40,7 @@
             >Exclusive</a
           >
           <button
-            class="navbar-toggler"
+            class="navbar-toggler col-1"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -50,9 +50,8 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="col-2"></div>
           <div
-            class="collapse navbar-collapse fw-bold d-flex justify-content-center col-4"
+            class="collapse navbar-collapse fw-bold d-flex justify-content-center col-3"
             id="navbarSupportedContent"
           >
             <ul
@@ -87,9 +86,8 @@
             </ul>
           </div>
 
-          <div class="col-2"></div>
-          <div class="col-3">
-            <form class="d-flex" role="search">
+          <div class="col-4 d-flex justify-content-center">
+            <form class="d-flex me-3 col-7" role="search">
               <input
                 class="form-control bg-secondary-subtle text-black"
                 type="search"
@@ -103,6 +101,36 @@
                 <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
               </button>
             </form>
+
+            <!-- Wishlist and Cart Icons -->
+            <div
+              class="d-flex align-items-center gap-3 col-4 justify-content-center"
+            >
+              <a
+                href="/components/wishlist/wishlist-page.html"
+                class="text-dark text-decoration-none position-relative"
+              >
+                <i class="fa-solid fa-heart fs-5"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count"
+                  style="font-size: 0.6rem"
+                >
+                  0
+                </span>
+              </a>
+              <a
+                href="/components/cart/cart.html"
+                class="text-dark text-decoration-none position-relative"
+              >
+                <i class="fa-solid fa-cart-shopping fs-5"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count"
+                  style="font-size: 0.6rem"
+                >
+                  0
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -111,7 +139,7 @@
     <!-- main body  -->
     <div id="main-content" class="py-5">
       <div class="container">
-        <table class="table">
+        <table class="table align-middle text-center">
           <thead>
             <tr>
               <th scope="col">Product</th>
@@ -120,14 +148,16 @@
               <th scope="col">Subtotal</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="cart-items">
             <!-- Cart items will be loaded dynamically here -->
           </tbody>
         </table>
-      
+
         <div class="d-flex justify-content-between">
-          <a href="../index.html" class="btn btn-outline-dark">Return to shop</a>
-          <button class="btn btn-outline-dark" onclick="clearCart()">Clear cart</button>
+          <a href="/components/home/home.html" class="btn btn-outline-dark"
+            >Return to shop</a
+          >
+          <button class="btn btn-outline-dark">Update Cart</button>
         </div>
         <div class="row mt-5">
           <!-- Coupon Form -->
@@ -144,7 +174,7 @@
               </button>
             </form>
           </div>
-      
+
           <!-- Cart Total Table -->
           <div class="col-md-6">
             <div class="card border-1 border-dark shadow-sm">
@@ -154,7 +184,7 @@
                   <tbody>
                     <tr class="border-bottom">
                       <td>Subtotal</td>
-                      <td class="text-end">$1750</td>
+                     <td class="text-end" id="cart-subtotal">$0</td>
                     </tr>
                     <tr class="border-bottom">
                       <td>Shipping</td>
@@ -162,17 +192,21 @@
                     </tr>
                     <tr class="fw-bold">
                       <td>Total</td>
-                      <td class="text-end">$1750</td>
+                      <td class="text-end" id="cart-total">$0</td>
                     </tr>
                   </tbody>
                 </table>
-                <button onclick="proceedToCheckout()" class="btn btn-danger w-100">Proceed to Checkout</button>
+                <button
+                  onclick="proceedToCheckout()"
+                  class="btn btn-danger w-100"
+                >
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
 
     <!-- footer -->
@@ -311,6 +345,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
-
-
-

@@ -71,25 +71,21 @@ const PRODUCTS_DATA = [
 const FEATURES_DATA = [
   {
     icon: "fa-truck",
-    title: "Free Shipping",
-    description: "Free shipping on all orders over $50"
-  },
-  {
-    icon: "fa-undo",
-    title: "Easy Returns",
-    description: "30 day return policy for all items"
-  },
-  {
-    icon: "fa-lock",
-    title: "Secure Payment",
-    description: "100% secure payment processing"
+    title: "Free and Fast Delivery",
+    description: "free delivery on all orders over $140"
   },
   {
     icon: "fa-headset",
-    title: "24/7 Support",
-    description: "Round the clock customer support"
+    title: "24/7 Customer Service",
+    description: "friendly 24/7 customer support"
+  },
+  {
+    icon: "fa-lock",
+    title: "Money Back Guarantee",
+    description: "we return money within 30 days"
   }
 ];
+
 
 // Make data available globally
 window.PRODUCTS_DATA = PRODUCTS_DATA;

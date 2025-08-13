@@ -1,7 +1,31 @@
-fetch("./header/header.html")
+// Use absolute paths so this works from any components/* page
+fetch("/components/header/header.html")
   .then((response) => response.text())
   .then((html) => {
     document.getElementById("header").innerHTML = html;
+    // After header loads, update icons based on localStorage
+    try {
+      const updateCounts = () => {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const wishlistCount = document.querySelector('#header .wishlist-count');
+        const cartCount = document.querySelector('#header .cart-count');
+        const heartIcon = document.querySelector('#header a[title="Wishlist"] i');
+        if (wishlistCount) {
+          wishlistCount.textContent = wishlist.length;
+          wishlistCount.style.display = wishlist.length ? 'block' : 'none';
+        }
+        if (heartIcon) {
+          heartIcon.className = wishlist.length ? 'fa-solid fa-heart fs-5 text-danger' : 'fa-solid fa-heart fs-5';
+        }
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+          cartCount.style.display = cart.length ? 'block' : 'none';
+        }
+      };
+      updateCounts();
+      window.addEventListener('storage', updateCounts);
+    } catch {}
   })
   .catch((error) => {
     console.error("Failed to load the header.html:", error);
@@ -43,7 +67,7 @@ fetch("./header/header.html")
 // });
 
 //footer
-fetch("./footer/footer.html")
+fetch("/components/footer/footer.html")
   .then((response) => response.text())
   .then((html) => {
     document.getElementById("footer").innerHTML = html;

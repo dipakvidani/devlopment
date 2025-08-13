@@ -1,4 +1,4 @@
-//generate stars
+// Generate stars
 function generateStars(rating) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 !== 0;
@@ -20,7 +20,7 @@ function generateStars(rating) {
   return stars;
 }
 
-//render products
+// Render products
 function renderProducts() {
   const container = document.getElementById("product-list");
   if (!container) return;
@@ -30,27 +30,24 @@ function renderProducts() {
     const isInWishlist = isProductInWishlist(product.id);
     html += `
       <div class="col-md-3 mb-4 d-flex">
-        <div class="card border-0 h-100 w-100 d-flex flex-column">
-
+        <div class="card border-0 h-100 w-100 d-flex flex-column" id="product-${product.id}">
           <div class="p-5 bg-secondary-subtle rounded-3 position-relative d-flex justify-content-center align-items-center" style="min-height: 220px;">
 
             <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 rounded-5 bg-white border-0 wishlist-btn" 
-                    id="${product.id}" 
+                    id="wishlist-${product.id}" 
                     onclick="toggleWishlist(${product.id})">
-              <i class="fa-${
-                isInWishlist ? "solid" : "regular"
-              } fa-heart text-${isInWishlist ? "danger" : "secondary"}"></i>
+              <i class="fa-${isInWishlist ? "solid" : "regular"} fa-heart text-${isInWishlist ? "danger" : "secondary"}"></i>
             </button>
 
             <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 mt-5 rounded-5 bg-white border-0 ">
               <i class="fa-regular fa-eye text-secondary"></i>
             </button>
 
-            <!-- Product image -->
-            <img src="${product.image}" class="img-fluid" alt="${
-      product.title
-    }" style="max-width: 120px; max-height: 120px; object-fit: contain;">
+            <img src="${product.image}" class="img-fluid" alt="${product.title}" 
+                 style="max-width: 120px; max-height: 120px; object-fit: contain;">
           </div>
+
+          <button class="btn btn-dark opacity-0 transition-all" id="addToCart-${product.id}">Add to Cart</button>
 
           <div class="card-body d-flex flex-column flex-grow-1">
             <h6 class="fw-bold">${product.title}</h6>
@@ -60,16 +57,46 @@ function renderProducts() {
               <span class="text-secondary small">(${product.reviews})</span>
             </div>
           </div>
-
         </div>
       </div>
     `;
   });
 
   container.innerHTML = html;
+
+  // Hover events for showing/hiding Add to Cart
+  PRODUCTS_DATA.forEach((product) => {
+    const productCard = document.getElementById(`product-${product.id}`);
+    const addToCartButton = document.getElementById(`addToCart-${product.id}`);
+
+    if (productCard && addToCartButton) {
+      productCard.addEventListener("mouseenter", () => {
+        addToCartButton.classList.remove("opacity-0");
+        addToCartButton.classList.add("opacity-100");
+      });
+
+      productCard.addEventListener("mouseleave", () => {
+        addToCartButton.classList.add("opacity-0");
+        addToCartButton.classList.remove("opacity-100");
+      });
+
+      // Add to cart click
+      addToCartButton.addEventListener("click", () => {
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const existingItem = cart.find((item) => item.id === product.id);
+        if (existingItem) {
+          existingItem.qty += 1;
+        } else {
+          cart.push({ ...product, qty: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateHeaderIcons();
+      });
+    }
+  });
 }
 
-//render features
+// Render features
 function renderFeatures() {
   const features = document.getElementById("features");
   if (!features) return;
@@ -96,93 +123,63 @@ function renderFeatures() {
   features.innerHTML = html;
 }
 
-// Wishlist functionality
-
-//check if product is in wishlist
+// Wishlist check
 function isProductInWishlist(productId) {
   const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
   return wishlist.includes(productId);
 }
 
-//toggle wishlist
+// Toggle wishlist
 function toggleWishlist(productId) {
   const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
   const isInWishlist = wishlist.includes(productId);
 
-  //if product is in wishlist, remove it
   if (isInWishlist) {
-    // Remove from wishlist
     const newWishlist = wishlist.filter((id) => id !== productId);
     localStorage.setItem("wishlist", JSON.stringify(newWishlist));
 
-    // Update button appearance
-    const button = document.querySelector(`[id="${productId}"]`);
+    const button = document.getElementById(`wishlist-${productId}`);
     if (button) {
       const icon = button.querySelector("i");
       icon.className = "fa-regular fa-heart text-secondary";
     }
   } else {
-    // Add to wishlist
     wishlist.push(productId);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-    // Update button appearance
-    const button = document.querySelector(`[id="${productId}"]`);
+    const button = document.getElementById(`wishlist-${productId}`);
     if (button) {
       const icon = button.querySelector("i");
       icon.className = "fa-solid fa-heart text-danger";
     }
   }
-  
-  // Update header icons after wishlist changes
+
   updateHeaderIcons();
 }
 
 // Update header icons
 function updateHeaderIcons() {
-  // Update wishlist icon and count
-  const wishlistIcon = document.querySelector('.fa-heart');
-  const wishlistCount = document.querySelector('.wishlist-count');
-  if (wishlistIcon && wishlistCount) {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  const wishlistCount = document.querySelector(".wishlist-count");
+  if (wishlistCount) {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
     wishlistCount.textContent = wishlist.length;
-    
-    // if (wishlist.length > 0) {
-    //   wishlistIcon.className = 'fa-solid fa-heart text-danger';
-    //   wishlistCount.style.display = 'block';
-    // } else {
-    //   wishlistIcon.className = 'fa-regular fa-heart';
-    //   wishlistCount.style.display = 'none';
-    // }
   }
-  
-  // Update cart count
-  const cartCount = document.querySelector('.cart-count');
+
+  const cartCount = document.querySelector(".cart-count");
   if (cartCount) {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     cartCount.textContent = cart.length;
-    if (cart.length === 0) {
-      cartCount.style.display = 'none';
-    } else {
-      cartCount.style.display = 'block';
-    }
+    cartCount.style.display = cart.length ? "block" : "none";
   }
 }
 
-// Make functions available globally
+// Global
 window.renderProducts = renderProducts;
 window.renderFeatures = renderFeatures;
 window.toggleWishlist = toggleWishlist;
 
-// load products and features
 document.addEventListener("DOMContentLoaded", () => {
-  if (typeof renderProducts === "function") {
-    renderProducts();
-  }
-  if (typeof renderFeatures === "function") {
-    renderFeatures();
-  }
-  
-  // Update header icons
+  renderProducts();
+  renderFeatures();
   updateHeaderIcons();
 });

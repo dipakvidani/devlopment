@@ -21,7 +21,7 @@
 
 <nav class="navbar navbar-expand-lg bg-transparent row border-bottom">
   <div class="d-flex justify-content-between px-5">
-    <a class="navbar-brand col-1 fw-bold text-center" href="index.html">Exclusive</a>
+    <a class="navbar-brand col-1 fw-bold text-center" href="/components/home/home.html">Exclusive</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -42,7 +42,7 @@
         class="navbar-nav d-flex justify-content-evenly w-100 aliit mb-2 mb-lg-0"
       >
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link active" aria-current="page" href="/components/index.html">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" onclick="showContact()">Contact</a>
@@ -51,14 +51,13 @@
           <a class="nav-link active" aria-current="page" href="#" onclick="showAbout()">About</a>
         </li>
          <li class="nav-item" id="auth-nav-item">
-          <a class="nav-link active" aria-current="page" href="login/login.html" id="auth-link">Sign up</a>
+          <a class="nav-link active" aria-current="page" href="/components/login/login.html" id="auth-link">Sign up</a>
         </li>
       </ul>
     </div>
 
-    <div class="col-2"></div>
-    <div class="col-3 d-flex align-items-center">
-      <form class="d-flex me-3" role="search">
+    <div class="col-4 d-flex justify-content-center align-items-center">
+      <form class="d-flex me-3 col-7" role="search">
         <input
           class="form-control bg-secondary-subtle text-black"
           type="search"
@@ -69,30 +68,30 @@
           <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         </button>
       </form>
-      
-      <!-- Favorite/Wishlist Icon -->
-      <a href="wishlist/wishlist-page.html" class="text-dark position-relative me-3" title="Wishlist">
-        <i class="fa-solid fa-heart fs-5"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count" style="font-size: 0.6rem;">
-          0
-        </span>
-      </a>
-      
-      <!-- Cart Icon -->
-      <a href="cart/cart.html" class="text-dark position-relative me-3" title="Cart">
-        <i class="fa-solid fa-shopping-cart fs-5"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" style="font-size: 0.6rem;">
-          0
-        </span>
-      </a>
-      
+
+      <!-- Icons: Wishlist and Cart -->
+      <div class="d-flex align-items-center gap-3 col-4 justify-content-center">
+        <a href="/components/wishlist/wishlist-page.html" class="text-dark position-relative" title="Wishlist">
+          <i class="fa-solid fa-heart fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count" style="font-size: 0.6rem;">
+            0
+          </span>
+        </a>
+        <a href="/components/cart/cart.html" class="text-dark position-relative" title="Cart">
+          <i class="fa-solid fa-cart-shopping fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" style="font-size: 0.6rem;">
+            0
+          </span>
+        </a>
+      </div>
+
       <!-- Profile Icon -->
-      <div class="dropdown">
+      <div class="dropdown ms-3">
         <a href="#" class="text-dark dropdown-toggle text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Profile">
           <i class="fa-solid fa-user fs-5"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-          <li><a class="dropdown-item" href="edit-profile/edit-profile.html">
+          <li><a class="dropdown-item" href="/components/edit-profile/edit-profile.html">
             <i class="fa-solid fa-user-edit me-2"></i>Edit Profile
           </a></li>
           <li><a class="dropdown-item" href="#" onclick="showOrders()">
