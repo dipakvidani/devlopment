@@ -90,7 +90,12 @@ function renderProducts() {
           cart.push({ ...product, qty: 1 });
         }
         localStorage.setItem("cart", JSON.stringify(cart));
-        updateHeaderIcons();
+        updateHeaderIcons(); 
+        const headerCartCount = document.querySelector("#header .cart-count");
+        if (headerCartCount) {
+          headerCartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+          headerCartCount.style.display = cart.length ? "block" : "none";
+        }
       });
     }
   });

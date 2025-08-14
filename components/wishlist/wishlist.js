@@ -50,9 +50,11 @@ function renderWishlist() {
                 <i class="fa-solid fa-trash text-danger"></i>
               </button>
               <div class="card-img-top p-4 bg-secondary-subtle d-flex align-items-center justify-content-center" style="min-height: 220px;">
-              <img src="${p.image}" alt="${p.title}" class="img-fluid" style="max-height: 160px; object-fit: contain;">
+                <img src="${p.image}" alt="${p.title}" class="img-fluid" style="max-height: 160px; object-fit: contain;">
               </div>
-              <button class="btn btn-dark mt-auto"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</button>
+              <button class="btn btn-dark mt-auto" onclick="addToCartFromWishlist(${p.id})">
+                <i class="fa-solid fa-cart-plus me-2"></i>Add to Cart
+              </button>
               <div class="card-body d-flex flex-column">
                 <h6 class="card-title">${p.title}</h6>
                 <div class="d-flex align-items-center mb-2">
@@ -119,13 +121,30 @@ function removeFromWishlist(productId) {
   renderWishlist();
 }
 
+function addToCartFromWishlist(productId) {
+  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  if (!product) return;
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const existingItem = cart.find(item => item.id === productId);
+  if (existingItem) {
+    existingItem.qty += 1;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  // Update header cart count if loaded dynamically
+  const headerCartCount = document.querySelector("#header .cart-count");
+  if (headerCartCount) {
+    headerCartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    headerCartCount.style.display = cart.length ? "block" : "none";
+  }
+}
 
-
-// Expose functions
 window.addToWishlist = addToWishlist;
 window.removeFromWishlist = removeFromWishlist;
+window.addToCartFromWishlist = addToCartFromWishlist;
 
-// Initialize on load
+// render wishlist on page load
 document.addEventListener("DOMContentLoaded", () => {
   renderWishlist();
 });
