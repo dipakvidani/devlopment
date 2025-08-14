@@ -44,7 +44,7 @@
           <!-- Coupon Form -->
           <div class="col-md-6 mb-3 mb-md-0 ">
             
-            <form class="d-flex gap-2 col-12 col-md-8">
+            <form class="d-flex gap-2 col-12 col-md-8" id="coupon-form">
               <input
                 type="text"
                 name="coupon"
@@ -55,6 +55,7 @@
                 Apply Coupon
               </button>
             </form>
+              <p id="coupon-feedback"></p>
           </div>
 
           <!-- Cart Total Table -->
@@ -72,6 +73,11 @@
                       <td>Shipping</td>
                       <td class="text-end">Free</td>
                     </tr>
+                    <tr class="border-bottom">
+                      <td>discount</td>
+                      <td class="text-end" id="cart-discount">$0</td>
+                    </tr>
+
                     <tr class="fw-bold">
                       <td>Total</td>
                       <td class="text-end" id="cart-total">$0</td>

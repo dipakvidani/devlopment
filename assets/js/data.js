@@ -1,12 +1,10 @@
-// Centralized data for the e-commerce application
-// This file contains all product and feature data used across components
-
+//products and features data for the e-commerce site
 const PRODUCTS_DATA = [
   {
     id: 1,
     title: "Gaming Controller",
     price: 99.99,
-    rating: 4.5,
+    rating: 4,
     reviews: 128,
     image: "../../assets/Images/gamepad.png"
   },
@@ -14,7 +12,7 @@ const PRODUCTS_DATA = [
     id: 2,
     title: "Laptop Computer",
     price: 199.99,
-    rating: 4.3,
+    rating: 3.3,
     reviews: 89,
     image: "../../assets/Images/laptop.png"
   },
@@ -22,7 +20,7 @@ const PRODUCTS_DATA = [
     id: 3,
     title: "Digital Camera",
     price: 49.99,
-    rating: 4.7,
+    rating: 2.7,
     reviews: 156,
     image: "../../assets/Images/camera.png"
   },
@@ -30,7 +28,7 @@ const PRODUCTS_DATA = [
     id: 4,
     title: "Stylish Jacket",
     price: 29.99,
-    rating: 4.2,
+    rating:5,
     reviews: 203,
     image: "../../assets/Images/jacket.png"
   },
@@ -46,7 +44,7 @@ const PRODUCTS_DATA = [
     id: 6,
     title: "Kids Toy Car",
     price: 15.99,
-    rating: 4.4,
+    rating: 5.4,
     reviews: 98,
     image: "../../assets/Images/kids-car.png"
   },
@@ -54,7 +52,7 @@ const PRODUCTS_DATA = [
     id: 7,
     title: "Skincare Product",
     price: 79.99,
-    rating: 4.1,
+    rating: 1.1,
     reviews: 167,
     image: "../../assets/Images/skincare.png"
   },
@@ -62,7 +60,7 @@ const PRODUCTS_DATA = [
     id: 8,
     title: "Cesar Product",
     price: 149.99,
-    rating: 4.8,
+    rating: 6.8,
     reviews: 234,
     image: "../../assets/Images/cesar-product.png"
   }

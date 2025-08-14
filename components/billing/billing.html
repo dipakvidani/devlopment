@@ -73,15 +73,18 @@
                 </div>
 
                 <div class="col-md-12">
-                  <label for="country" class="form-label">country</label>
-                  <select name="country" id="country">
+                  <label for="country" class="form-label">Country</label>
+                  <select name="country" id="country" class="form-select">
                     <option value="ind">India</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="us">United States</option>
+                    <option value="aus">Australia</option>
                   </select>
                 </div>
 
                 <div class="col-md-12">
                   <label for="state" class="form-label">state</label>
-                  <select name="state" id="state">
+                  <select name="state" id="state" class="form-select">
                     <option value="guj">Gujrat</option>
                     <option value="uk">Uttarakhand</option>
                     <option value="del">Delhi</option>
@@ -124,7 +127,12 @@
                 </div>
 
                 <div class="col-md-12">
-                  <input type="checkbox" name="save_info" id="save_info" />
+                  <input
+                    type="checkbox"
+                    name="save_info"
+                    id="save_info"
+                    checked
+                  />
                   <label for="save_info" class="form-label">
                     Save this information for faster checkout next time
                   </label>
@@ -143,7 +151,7 @@
             <div class="row">
               <div class="col-6">
                 <div>
-                  <input type="radio" name="payment_type" id="bank" />
+                  <input type="radio" name="payment_type" id="bank" checked />
                   <label for="bank">Bank:</label>
                 </div>
                 <div>
@@ -167,7 +175,7 @@
             <p></p>
 
             <div class="mb-3 mb-md-0">
-              <form class="d-flex gap-2">
+              <form class="d-flex gap-2" id="coupon-form">
                 <input
                   type="text"
                   name="coupon"
@@ -177,10 +185,17 @@
                 <button type="submit" class="btn btn-danger rounded-0 px-2">
                   Apply Coupon
                 </button>
+                <!-- coupon is valid or not -->
               </form>
+              <p id="coupon-feedback"></p>
 
               <p></p>
-              <button class="btn btn-danger py-2 rounded-1" onclick="handleOrder()">Place Order</button>
+              <button
+                class="btn btn-danger py-2 rounded-1"
+                onclick="handleOrder()"
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </div>

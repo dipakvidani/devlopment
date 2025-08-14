@@ -30,26 +30,34 @@ function renderProducts() {
     const isInWishlist = isProductInWishlist(product.id);
     html += `
       <div class="col-md-3 mb-4 d-flex">
-        <div class="card border-0 h-100 w-100 d-flex flex-column" id="product-${product.id}">
+        <div class="card border-0 h-100 w-100 d-flex flex-column" id="product-${
+          product.id
+        }">
           <div class="p-5 bg-secondary-subtle rounded-3 position-relative d-flex justify-content-center align-items-center" style="min-height: 220px;">
 
             <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 rounded-5 bg-white border-0 wishlist-btn" 
                     id="wishlist-${product.id}" 
                     onclick="toggleWishlist(${product.id})">
-              <i class="fa-${isInWishlist ? "solid" : "regular"} fa-heart text-${isInWishlist ? "danger" : "secondary"}"></i>
+              <i class="fa-${
+                isInWishlist ? "solid" : "regular"
+              } fa-heart text-${isInWishlist ? "danger" : "secondary"}"></i>
             </button>
 
             <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 mt-5 rounded-5 bg-white border-0 ">
               <i class="fa-regular fa-eye text-secondary"></i>
             </button>
 
-            <img src="${product.image}" class="img-fluid" alt="${product.title}" 
+            <img src="${product.image}" class="img-fluid" alt="${
+      product.title
+    }" 
                  style="max-width: 120px; max-height: 120px; object-fit: contain;">
           </div>
 
-          <button class="btn btn-dark opacity-0 transition-all" id="addToCart-${product.id}">Add to Cart</button>
+          <button class="btn btn-dark opacity-0 transition-all" id="addToCart-${
+            product.id
+          }">Add to Cart</button>
 
-          <div class="card-body d-flex flex-column flex-grow-1">
+          <div class="card-body d-flex flex-column flex-grow-1 p-0">
             <h6 class="fw-bold">${product.title}</h6>
             <div class="mt-auto d-flex justify-content-between align-items-center">
               <span class="text-danger fw-bold">$${product.price}</span>
@@ -90,10 +98,13 @@ function renderProducts() {
           cart.push({ ...product, qty: 1 });
         }
         localStorage.setItem("cart", JSON.stringify(cart));
-        updateHeaderIcons(); 
+        updateHeaderIcons();
         const headerCartCount = document.querySelector("#header .cart-count");
         if (headerCartCount) {
-          headerCartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+          headerCartCount.textContent = cart.reduce(
+            (sum, item) => sum + item.qty,
+            0
+          );
           headerCartCount.style.display = cart.length ? "block" : "none";
         }
       });
@@ -148,6 +159,7 @@ function toggleWishlist(productId) {
       const icon = button.querySelector("i");
       icon.className = "fa-regular fa-heart text-secondary";
     }
+    updateHeaderIcons();
   } else {
     wishlist.push(productId);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
@@ -157,9 +169,8 @@ function toggleWishlist(productId) {
       const icon = button.querySelector("i");
       icon.className = "fa-solid fa-heart text-danger";
     }
+    updateHeaderIcons();
   }
-
-  updateHeaderIcons();
 }
 
 // Update header icons

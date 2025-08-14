@@ -26,6 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       }
+
+      // Hide header icons on login page (after header is loaded)
+      if (window.location.pathname.endsWith("login.html")) {
+        const headerIcons = document.getElementById("header-icons");
+        if (headerIcons) {
+          headerIcons.style.display = "none";
+        }
+      }
     })
     .catch((error) => console.error("Error loading header:", error));
 });
@@ -65,11 +73,9 @@ function handleAuthState() {
         .toUpperCase()}</span>`;
     }
 
-
     if (authNavItem) authNavItem.style.display = "none";
     if (logoutLink) logoutLink.style.display = "block";
   } else {
-
     if (authNavItem) authNavItem.style.display = "block";
     if (logoutLink) logoutLink.style.display = "none";
   }
@@ -94,7 +100,4 @@ function handleLogout() {
   }
 }
 
-let headerIcons= document.getElementById("header-icons");
-if (headerIcons) {
-  localStorage.getItem("isLoggedIn") ? headerIcons.classList.remove("d-none") : headerIcons.classList.add("d-none");
-}
+window.updateHeaderIcons = updateHeaderIcons;

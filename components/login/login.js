@@ -41,11 +41,11 @@ document.addEventListener("submit", function (event) {
         localStorage.setItem("authToken", data.accessToken || "");
         localStorage.setItem("currentUser", JSON.stringify(data));
         localStorage.setItem("isLoggedIn", "true");
+        window.location.replace("/components/home/home.html");
       } catch {
         console.warn("Failed to parse login response");
       }
     //   alert("Login successful!");
-      location.href = "../home/home.html";
     } else {
       let errorMsg = "Login failed!";
       try {
