@@ -1,3 +1,17 @@
+function togglePasswordVisibility() {
+  const passwordInput = document.querySelector("#userPassword");
+  if (passwordInput) {
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    const icon = document.querySelector(".toggle-password-icon");
+    if (icon) {
+      icon.className =
+        type === "password" ? "fa-solid fa-eye-slash toggle-password-icon" : "fa-solid fa-eye toggle-password-icon";
+    }
+  }
+}
+
 // Attach a delegated submit handler so it works even if the form is injected later
 document.addEventListener("submit", function (event) {
   const target = event.target;
@@ -5,7 +19,7 @@ document.addEventListener("submit", function (event) {
 
   const emailInput = target.querySelector("#userEmail");
   const passwordInput = target.querySelector("#userPassword");
-  if (!emailInput || !passwordInput) return; 
+  if (!emailInput || !passwordInput) return;
 
   console.log("Submitting login form...");
   event.preventDefault();
@@ -42,10 +56,11 @@ document.addEventListener("submit", function (event) {
         localStorage.setItem("currentUser", JSON.stringify(data));
         localStorage.setItem("isLoggedIn", "true");
         window.location.replace("/components/home/home.html");
+        generateCouponCode();
       } catch {
         console.warn("Failed to parse login response");
       }
-    //   alert("Login successful!");
+      //   alert("Login successful!");
     } else {
       let errorMsg = "Login failed!";
       try {

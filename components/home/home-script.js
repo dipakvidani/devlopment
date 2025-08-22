@@ -179,6 +179,8 @@ function updateHeaderIcons() {
   if (wishlistCount) {
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
     wishlistCount.textContent = wishlist.length;
+    wishlistCount.style.display = wishlist.length ? "block" : "none";
+
   }
 
   const cartCount = document.querySelector(".cart-count");

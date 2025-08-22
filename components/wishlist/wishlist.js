@@ -5,9 +5,12 @@ function generateStars(rating) {
   const hasHalf = rating % 1 !== 0;
   let stars = "";
 
-  for (let i = 0; i < full; i++) stars += '<i class="fa-solid fa-star text-warning"></i>';
-  if (hasHalf) stars += '<i class="fa-solid fa-star-half-stroke text-warning"></i>';
-  for (let i = full + (hasHalf ? 1 : 0); i < 5; i++) stars += '<i class="fa-regular fa-star text-secondary"></i>';
+  for (let i = 0; i < full; i++)
+    stars += '<i class="fa-solid fa-star text-warning"></i>';
+  if (hasHalf)
+    stars += '<i class="fa-solid fa-star-half-stroke text-warning"></i>';
+  for (let i = full + (hasHalf ? 1 : 0); i < 5; i++)
+    stars += '<i class="fa-regular fa-star text-secondary"></i>';
 
   return stars;
 }
@@ -40,10 +43,12 @@ function renderWishlist() {
       </div>
     `;
   } else {
-    const products = PRODUCTS_DATA.filter(p => ids.includes(p.id));
+    const products = PRODUCTS_DATA.filter((p) => ids.includes(p.id));
     wishlistContainer.innerHTML = `
       <div class="row g-4">
-        ${products.map(p => `
+        ${products
+          .map(
+            (p) => `
           <div class="col-md-3 col-sm-6 d-flex">
             <div class="card position-relative flex-fill shadow-none border-0 h-100">
               <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle" onclick="removeFromWishlist(${p.id})" title="Remove">
@@ -63,7 +68,9 @@ function renderWishlist() {
               </div>
             </div>
           </div>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -76,18 +83,24 @@ function renderJustForYou(wishlistIds) {
   //if container is not found or PRODUCTS_DATA is not an array, return
   if (!container || !Array.isArray(PRODUCTS_DATA)) return;
 
-  const recommendations = PRODUCTS_DATA.filter(p => !wishlistIds.includes(p.id)).slice(0, 4);
-  container.innerHTML = recommendations.map(p => `
+  const recommendations = PRODUCTS_DATA.filter(
+    (p) => !wishlistIds.includes(p.id)
+  ).slice(0, 4);
+  container.innerHTML = recommendations
+    .map(
+      (p) => `
     <div class="col-md-3 col-sm-6 d-flex">
       <div class="card position-relative flex-fill shadow-none border-0 h-100">
         <div class="card-img-top p-4 bg-secondary-subtle d-flex align-items-center justify-content-center" style="min-height: 220px;">
        <button class="btn btn-outline-secondary position-absolute top-0 end-0 m-2 rounded-5 bg-white border-0 ">
               <i class="fa-regular fa-eye text-secondary"></i>
             </button>   
-            <img src="${p.image}" alt="${p.title}" class="img-fluid" style="max-height: 160px; object-fit: contain;">
+            <img src="${p.image}" alt="${
+        p.title
+      }" class="img-fluid" style="max-height: 160px; object-fit: contain;">
           </div>
-          <button class="btn btn-dark mt-auto">
-            <i class="fa-solid fa-cart-plus me-2"></i>Add to Cart
+          <button class="btn btn-dark mt-auto" onclick="addToCartFromWishlist(${p.id})">
+            <i class="fa-solid fa-cart-plus me-2"  ></i>Add to Cart
           </button>
         <div class="card-body d-flex flex-column">
           <h6 class="card-title">${p.title}</h6>
@@ -103,7 +116,9 @@ function renderJustForYou(wishlistIds) {
         </div>
       </div>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 function addToWishlist(productId) {
@@ -116,16 +131,16 @@ function addToWishlist(productId) {
 }
 
 function removeFromWishlist(productId) {
-  const ids = getWishlistIds().filter(id => id !== productId);
+  const ids = getWishlistIds().filter((id) => id !== productId);
   setWishlistIds(ids);
   renderWishlist();
 }
 
 function addToCartFromWishlist(productId) {
-  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  const product = PRODUCTS_DATA.find((p) => p.id === productId);
   if (!product) return;
   let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const existingItem = cart.find(item => item.id === productId);
+  const existingItem = cart.find((item) => item.id === productId);
   if (existingItem) {
     existingItem.qty += 1;
   } else {

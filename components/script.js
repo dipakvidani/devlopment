@@ -8,13 +8,17 @@ fetch("/components/header/header.html")
     const headerIcons = document.getElementById("header-icons");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     if (!isLoggedIn) {
-     headerIcons.classList.replace("d-flex", "d-none");
+      headerIcons.classList.replace("d-flex", "d-none");
     }
+
+    // Always update counts after header loads
+    window.updateCounts();
 
     //setTimeout to ensure dropdown logic
     setTimeout(() => {
       const dropdownTrigger = document.getElementById("profileDropdown");
-      const dropdownMenu = dropdownTrigger && dropdownTrigger.nextElementSibling;
+      const dropdownMenu =
+        dropdownTrigger && dropdownTrigger.nextElementSibling;
       if (dropdownTrigger && dropdownMenu) {
         // Remove previous listeners if any
         dropdownTrigger.onclick = null;
@@ -37,7 +41,7 @@ fetch("/components/header/header.html")
     // After header loads, update icons based on localStorage
     try {
       window.updateCounts();
-      window.addEventListener('storage', window.updateCounts);
+      window.addEventListener("storage", window.updateCounts);
     } catch {}
   })
   .catch((error) => {
@@ -66,7 +70,7 @@ fetch("/components/footer/footer.html")
     console.error("Failed to load the footer.html:", error);
   });
 
-  //profile dropdown logic
+//profile dropdown logic
 function attachProfileDropdown() {
   const dropdownTrigger = document.getElementById("profileDropdown");
   const dropdownMenu = dropdownTrigger && dropdownTrigger.nextElementSibling;
@@ -95,34 +99,41 @@ function logout() {
 }
 
 //update counts
-window.updateCounts = function() {
-  const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  const wishlistCount = document.querySelector('#header .wishlist-count');
-  const cartCount = document.querySelector('#header .cart-count');
+window.updateCounts = function () {
+  const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const wishlistCount = document.querySelector("#header .wishlist-count");
+  const cartCount = document.querySelector("#header .cart-count");
 
   // Update wishlist count
   if (wishlistCount) {
     wishlistCount.textContent = wishlist.length;
-    wishlistCount.style.display = wishlist.length ? 'block' : 'none';
+    wishlistCount.style.display = wishlist.length ? "block" : "none";
   }
- 
+
   // Update heart icon
   if (cartCount) {
-    cartCount.textContent = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-    cartCount.style.display = cart.length ? 'block' : 'none';
+    cartCount.textContent = cart.reduce(
+      (sum, item) => sum + (item.qty || 1),
+      0
+    );
+    cartCount.style.display = cart.length ? "block" : "none";
   }
 };
 
-
 function generateCouponCode() {
-  let name = "DIP"; 
-  let company = "DEVIT"; 
+  let currentUser = localStorage.getItem("currentUser") || "{}";
+  let userObj = {};
+  try {
+    userObj = JSON.parse(currentUser);
+  } catch {}
+  let firstName = userObj.firstName || "DIP";
+  let company = "DEVIT";
 
   // Get current date
   let today = new Date();
 
-  //current year
+  // Current year
   let year = today.getFullYear();
 
   // If current month is before April, use last year for financial year
@@ -139,12 +150,14 @@ function generateCouponCode() {
   // Get current month in uppercase
   let month = today.toLocaleString("en-US", { month: "short" }).toUpperCase();
 
+  // First 4 letters from firstName, pad if needed
+  let first4 = (firstName + "XXXX").slice(0, 4);
 
-  let coupon = name + company + fy + month;
+  let coupon = first4 + company + fy + month;
 
   localStorage.setItem("coupon", coupon);
 
   return coupon;
 }
 
-generateCouponCode();
+window.generateCouponCode = generateCouponCode;
